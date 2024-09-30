@@ -1,11 +1,12 @@
 {
-  "name": "exadel-test-task",
+  "name": "kernelics-test-task",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "compile": "tsc",
     "start": "npm run compile && node ./dist/index.js",
-    "dev": "ts-node-dev --respawn --transpile-only ./src/index.ts"
+    "dev": "ts-node-dev --respawn --transpile-only ./src/index.ts",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "keywords": [],
   "author": "Sergei Stralenia",
@@ -21,6 +22,9 @@
     "graphql": "^16.9.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "5.0.2",
+    "@graphql-codegen/typescript": "4.0.9",
+    "@graphql-codegen/typescript-resolvers": "4.2.1",
     "@types/debug": "^4.1.12",
     "@types/node": "^22.7.4",
     "ts-node-dev": "^2.0.0",

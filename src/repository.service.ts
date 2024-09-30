@@ -1,6 +1,7 @@
 import Debug from 'debug';
 
 import { fetchRepositories, getRepository, getRepositoryContent, getRepositoryWebhooks } from './github.service';
+import { Visibility } from './generated/graphql';
 
 const debug = Debug('repository');
 
@@ -52,6 +53,9 @@ export const getRepositories = async ({ token }: { token: string; }) => {
   }));
 };
 
+/**
+ * @TODO: Probably need to add cache for some time
+ */
 export const getRepositoryDetails = async ({ name, token, owner }: { name: string; token: string; owner: string; }) => {
   const repository = await getRepository({ name, token, owner });
   debug('repository', repository);
@@ -78,7 +82,7 @@ export const getRepositoryDetails = async ({ name, token, owner }: { name: strin
     name: repository.name,
     size: repository.size,
     owner: repository.owner.login,
-    visibility: repository.private ? 'PRIVATE' : 'PUBLIC',
+    visibility: repository.private ? Visibility.Private : Visibility.Public,
     numberOfFiles: filesCount,
     ymlContent,
     webhooks,
